@@ -1,0 +1,55 @@
+.sortable-table {
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 96%;
+}
+
+.sortable-table thead tr {
+  font-size: 18px;
+  line-height: 1.2;
+  background-color: #f77416;
+  color: #fff;
+  height: 50px;
+}
+
+.sortable-table tbody tr {
+  font-size: 15px;
+  line-height: 1.2;
+  color: #808080;
+  height: 45px;
+}
+
+.sortable-table tbody tr.even {
+  background-color: #f5f5f5;
+}
+
+table.sortable-table tbody tr:hover {
+  background-color: #f774163f;
+}
+
+.sortable-table tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+.sortable-table tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+.sortable-table thead tr {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.sortable-table thead tr th:first-child {
+  border-top-left-radius: 10px;
+}
+
+.sortable-table thead tr th:last-child {
+  border-top-right-radius: 10px;
+}

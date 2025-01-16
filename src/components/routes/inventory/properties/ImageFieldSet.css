@@ -1,0 +1,134 @@
+
+.image-gallery {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* background-color: red; */
+}
+
+.image-uploader {
+  min-width: 348px;
+  max-width: 348px;
+  min-height: 192px;
+  max-height: 192px;
+  border: 4px #f77416 dashed;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.input-selector {
+  flex-shrink: 0;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-wraper {
+  position: relative;
+  /* display: inline-block; */
+  display: flex;
+  flex-direction: row;
+}
+
+.input-wraper input {
+  border: 2px solid #f77416;
+  height: 24px;
+  width: 100%;
+}
+
+.input-wraper input:focus {
+  outline: none;
+}
+
+.input-wraper button {
+  background-color: #f77416;
+  height: 30px;
+  color: #fff;
+  font-size: 18px;
+  /* position: absolute;
+  top: 0;
+  right: 0; */
+  border: none;
+  cursor: pointer;
+}
+
+.gallery-image-container {
+  /* 16:9 (356x200) + 10px, 3:2 or 4:3 */
+  min-width: 356px;
+  max-width: 356px;
+  height: 200px;
+  max-height: 200px;
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0;
+}
+
+.image-holder {
+  width: 336px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 5px 5px 10px 5px;
+  background-color: #cbcbcb;
+  position: relative;
+}
+
+.gallery-preview-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.gallery-preview-overlay div {
+  color: #fff;
+  align-self: center;
+  height: 100%;
+  width: 50%;
+  font-size: 52px;
+  background-color: #ffffff20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gallery-preview-overlay .preview-save:hover {
+  background-color: #f7741620;
+  color: #f77416;
+}
+
+.gallery-preview-overlay .preview-delete:hover {
+  background-color: #ff000020;
+  color: red;
+}
+
+.left-padding,
+.right-padding {
+  width: 10px;
+  height: 100%;
+  /* background-color: aqua; */
+}
+
+.gallery-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.gallery-image {
+  /* display: none; */
+  width: 100%;
+  height: 100%;
+  /* padding: 20px; */
+  background-color: blue;
+}

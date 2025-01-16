@@ -1,0 +1,51 @@
+
+.main-property-container {
+  min-width: 620px;
+  max-width: 720px;
+  margin: auto;
+  padding: 10px;
+  border: 1px solid #f5f5f5;
+  border-radius: 10px;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+.main-property-card {
+  display: flex;
+}
+
+.main-property-card .image {
+  margin: 10px;
+}
+
+.main-property-card .image img {
+  max-width: 250px;
+}
+.main-property-tabs .tab-header {
+  display: flex;
+}
+
+.main-property-tabs .tab-header div {
+  border-bottom: 3px solid #fff;
+  font-size: 18px;
+  padding: 10px 20px;
+}
+
+.main-property-tabs .tab-header div:hover {
+  border-bottom: 3px solid #03a8f4;
+}
+
+.main-property-tabs .tab-header div.active {
+  border-bottom: 3px solid #f77416;
+}
+
+.main-property-tabs .tab-container > div {
+  display: none;
+}
+
+.main-property-tabs .tab-container > div.active {
+  display: flex;
+}
+
+.form-edit .form-row{
+  display: flex;
+}

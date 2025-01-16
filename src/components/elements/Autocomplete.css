@@ -1,0 +1,27 @@
+
+.autocomplete-container {
+  position: relative;
+}
+
+.autocomplete-suggestion-list {
+  position: absolute;
+  z-index: 10;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+}
+
+.autocomplete-suggestion-list > div {
+  background-color: #fff;
+  padding: 10px 20px;
+}
+
+.autocomplete-suggestion-list > div:hover {
+  background-color: #f774163f;
+}
+
+.autocomplete-suggestion-list > div.active {
+  background-color: #f77416;
+  color: #fff;
+}

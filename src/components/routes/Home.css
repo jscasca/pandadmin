@@ -1,0 +1,20 @@
+
+.home-link {
+  text-decoration: none;
+}
+
+.linked-div {
+  display: flex;
+  width: 160px;
+  height: 160px;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7741699;
+  font-size: 20px;
+  color: white;
+  margin: 10px;
+}
+
+.linked-div:hover {
+  background-color: #f77416ff;
+}

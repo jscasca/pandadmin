@@ -1,0 +1,1 @@
+export const MAP_API = process.env.MAP_API || '';

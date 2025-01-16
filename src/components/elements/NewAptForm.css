@@ -1,0 +1,130 @@
+.newapt-container {
+  width: 620px;
+  /* padding: 8% 0 0; */
+  margin: auto;
+}
+
+.section-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.newapt-form-row {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.newapt-container .short {
+  width: 100px;
+}
+
+.newapt-container .medium {
+  flex-grow: 1;
+}
+
+.newapt-container .long {
+  flex-grow: 2;
+}
+
+.newapt-container .field {
+  display: flex;
+  flex-direction: column;
+  margin: 0 6px;
+  flex-grow: 1;
+}
+
+.newapt-container .field-s {
+  display: flex;
+  flex-direction: row;
+  margin: 0 6px;
+  flex-grow: 1;
+}
+
+.newapt-container .field-s input {
+  width: 260px;
+}
+
+.newapt-container .inline-field {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.newapt-container input.empty {
+  border-bottom: 2px solid #dd0000;
+}
+
+.newapt-container input:disabled,
+.newapt-container input[disabled] {
+  border-bottom: 2px solid #8a8a8a;
+  background-color:#cdcfd1bb;
+}
+
+.newapt-container select {
+  border: 0;
+  outline: 0;
+  border-bottom: 2px solid #03a8f45e;
+  font-size: 1.4rem;
+}
+
+.newapt-container input {
+  border: 0;
+  outline: 0;
+  border-bottom: 2px solid #03a8f45e;
+  font-size: 1.4rem;
+  color: #5e6775;
+  margin: 0 4px;
+  width: 94%;
+}
+
+.newapt-container input::placeholder {
+  color: #ccc;
+}
+
+.newapt-form-row label {
+  padding: 10px 5px;
+  margin-left: 8px;
+}
+
+.newapt-container .section {
+  border: 1px solid;
+  margin-top: 20px;
+}
+
+.newapt-container .section-legend {
+  margin: auto;
+  padding: 30px;
+}
+
+.newapt-controls {
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.newapt-controls button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  background-color: #03a8f4;
+  min-width: 128px;
+}
+
+.newapt-controls img {
+  width: 15px;
+  height: 15px;
+}
+
+.newapt-controls button.main {
+  background-color: #f77416;
+}
+
+.newapt-controls button.main:disabled,
+.newapt-controls button.main[disabled] {
+  background-color: #03a8f45e;
+}

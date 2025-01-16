@@ -1,0 +1,26 @@
+
+.drop-zone {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 4px;
+  width: 98%;
+  height: 96px;
+  border-radius: 5px;
+  background-color: #dfdfdf;
+  text-align: center;
+  display: flex;
+}
+
+.drop-zone .text-center {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  color: #808080;
+  font-size: 18px;
+}
+
+.text-center p {
+  padding-left: 10px;
+}
