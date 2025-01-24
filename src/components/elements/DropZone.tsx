@@ -1,35 +1,18 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { /*useCallback, useState,*/ useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { MdFileDownload } from "react-icons/md";
 
 import './DropZone.css';
-import { FileUpload } from "./FileUpload";
+// import { FileUpload } from "./FileUpload";
 
 type Props = {
-  open?: any;
-  uploadUrl: string;
+  onDrop: (f: any) => void;
 };
 
-export const DropZone = ({ open, uploadUrl }: Props) => {
-
-  const [uploads, setUploads] = useState<any[]>([]);
-
-  console.log(open);
-
-  const onDrop = useCallback((acceptedFiles: any) => {
-    console.log('accepted files: ', acceptedFiles);
-    const nextUpload = { file: acceptedFiles };
-    setUploads([...uploads, nextUpload])
-  }, [uploads]);
+export const DropZone = ({ onDrop }: Props) => {
 
   const { getRootProps, getInputProps, isDragActive /*, acceptedFiles */ } = useDropzone({ onDrop });
   useEffect(() => {},[]);
-
-  // const files = acceptedFiles.map((file) => (
-  //   <li key={file.path}>
-  //     {file.path} - {file.size} bytes
-  //   </li>
-  // ));
 
   // const upload = (file: any, onUploadProgress: any) => {
   //   const formData = new FormData();
@@ -60,7 +43,7 @@ export const DropZone = ({ open, uploadUrl }: Props) => {
     </div>
     <div className="drop-queue">
       {/* {files} */}
-      { uploads.map((u) => (<FileUpload file={u.file} url={uploadUrl} />))}
+      {/* { uploads.map((u) => (<FileUpload file={u.file} url={uploadUrl} />))} */}
     </div>
   </>);
 };

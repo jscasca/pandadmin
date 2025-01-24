@@ -101,6 +101,12 @@
   align-items: center;
 }
 
+.gallery-preview-overlay img {
+  width: 120px;
+  height: 120px;
+  margin: auto;
+}
+
 .gallery-preview-overlay .preview-save:hover {
   background-color: #f7741620;
   color: #f77416;

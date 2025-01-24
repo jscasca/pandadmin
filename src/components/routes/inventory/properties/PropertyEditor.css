@@ -9,12 +9,37 @@
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
 
+.main-property-container h1 {
+  text-align: center;
+  background-color: #f77416;
+}
+
 .main-property-card {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* background-color: blue; */
+}
+
+.main-property-card .details {
+  /* background-color: aqua; */
+  color: #a0a0a0;
+  font-size: 18px;
+  margin-left: 10px;
 }
 
 .main-property-card .image {
   margin: 10px;
+  /* background-color: aquamarine; */
+}
+
+.main-property-card .image-holder {
+  width: 360px;
+  height: 220px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: black;
+  background-position: center;
 }
 
 .main-property-card .image img {
