@@ -1,0 +1,28 @@
+
+.directory {
+    margin-top: 10px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.directory .item {
+    margin-left: 5px;
+    color: #cbcbcb;
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.directory .item:hover {
+    background-color: #f7741699;
+    color: white;
+}
+
+.directory .item a:link,
+.directory .item a:visited,
+.directory .item a:hover {
+    /* color: #cbcbcb; */
+    color: inherit;
+    text-decoration: none;
+}
