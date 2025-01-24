@@ -1,1 +1,1 @@
-export const MAP_API = process.env.MAP_API || '';
+export const MAP_API = process.env.REACT_APP_MAP_API || '';
