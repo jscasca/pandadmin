@@ -1,0 +1,112 @@
+
+.main-feature-row {
+	display: flex;
+  flex-direction: row;
+}
+
+.main-feature-row .form-field {
+  display: flex;
+	flex-direction: column;
+	margin-right: 30px;
+}
+
+.main-feature-row .form-field label {
+	text-align: center;
+}
+
+.main-feature-row .form-field .field {
+	display: flex;
+	flex-direction: row-reverse;
+	font-size: 28px;
+	margin-top: 10px;
+}
+
+.main-feature-row .form-field .field input {
+	margin-left: 20px;
+}
+
+.form-field .field input {
+	border: 0;
+  outline: 0;
+	width: 64px;
+  border-bottom: 2px solid #03a8f45e;
+  font-size: 1.4rem;
+  color: #5e6775;
+}
+
+.form-field .field input:active,
+.form-field .field input:focus {
+	border-bottom: 2px solid#03a8f4;
+}
+
+.form-row {
+	margin-bottom: 10px;
+}
+
+.form-controls {
+	padding: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.form-controls button {
+	border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+	font-weight: 700;
+  background-color: #03a8f4;
+  min-width: 128px;
+	cursor: pointer;
+}
+
+.form-controls button.main {
+	background-color: #f77416;
+}
+
+.form-controls button.main:disabled,
+.form-controls button.main[disabled] {
+	background-color: #03a8f45e;
+}
+
+.amenities {
+	border: 2px solid #f7741690;
+	border-radius: 6px;
+	margin: 10px 0;
+	padding: 5px;
+}
+
+.amenity-tag {
+	border: 0;
+	border-radius: 3px;
+	background-color: #f7741660;
+	color: #fbfbfb;
+	padding: 7px 12px;
+	margin: 0 7px 7px 0px;
+	font-size: 16px;
+}
+
+.amenities input {
+	border: 2px solid #03a8f45e;
+	border-radius: 6px;
+	padding: 10px;
+}
+
+.amenities input:active,
+.amenities input:focus,
+.amenities input:focus-visible {
+	border-color: #03a8f4;
+	outline: none;
+}
+
+.amenity-tag span {
+	color: #5e6775;
+	margin-right: 7px;
+}
+
+.amenity-tag:hover {
+	background-color: #f77416ab;
+}

@@ -91,6 +91,13 @@ export const PropertyEditor = ({listingId}: Props) => {
     backgroundImage: `url(${listing?.coverimage ? listing.coverimage : '/no_image.jpg'})`
   }
 
+  const saveFeatures = async (updates: any) => {
+    console.log('Saving updates: ', updates);
+    const updated = await authAxios.put(`/inventory/properties/${listingId}`, updates);
+    console.log(updated);
+    setListing(updated.data);
+  };
+
   return (<>
     <div className="main-property-container">
       { fetching ? <img src='/loading-gif.gif' alt='loading...' /> : (<div>
@@ -118,7 +125,7 @@ export const PropertyEditor = ({listingId}: Props) => {
         </div>
         <div className="tab-container">
           <div className={activeTab === 'features' ? 'active' : ''}>
-            <FeatureFieldSet onSave={()=> {}} data={{}} />
+            <FeatureFieldSet onSave={saveFeatures} data={listing} />
           </div>
           <div className={activeTab === 'images' ? 'active' : ''}>
             { listingId && (<ImageFieldSet propertyId={listingId} onSave={() => {}} data={{}} />)}
