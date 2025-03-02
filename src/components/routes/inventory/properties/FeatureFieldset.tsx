@@ -25,6 +25,7 @@ export const FeatureFieldSet = ({ data, onSave }: Props) => {
   const [ amenities, setAmenities ] = useState<string[]>(['One', 'Two']);
 
   useEffect(() => {
+    if (!data) return;
     console.log('changed data: ', data);
     if (data.rooms) setRooms(data.rooms);
     if (data.bathrooms) setBathRooms(data.bathrooms);

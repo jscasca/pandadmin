@@ -13,7 +13,9 @@ import './ImageFieldSet.css';
 type Props = {
   propertyId: string;
   data: any;
-  onSave: () => void;
+  onSaveOrder: (images: String[]) => void;
+  onSaveFile: (file: File) => void;
+  onSaveUrl: (url: String) => void;
 };
 
 type Preview = {
@@ -22,23 +24,22 @@ type Preview = {
   id: string;
 };
 
-export const ImageFieldSet = ({ data, onSave, propertyId }: Props) => {
-  console.log(onSave);
+export const ImageFieldSet = ({ data, onSaveOrder, onSaveFile, onSaveUrl, propertyId }: Props) => {
+  console.log(onSaveOrder);
   const uploadUrl = `inventory/properties/${propertyId}/fakeimages`;
   console.log(uploadUrl);
 
   const [ imageUrl, setImageUrl ] = useState('');
 
-  const images = [
-    'https://www.cronyxdigital.com/hubfs/Blog%20Images/Cronyx%20blog%20post%20images%20-%202.png',
-    'https://www.cronyxdigital.com/hubfs/Blog%20Images/Cronyx%20blog%20post%20images%20-%202.png',
-    'https://www.cronyxdigital.com/hubfs/Blog%20Images/Cronyx%20blog%20post%20images%20-%202.png'
-  ];
+  const [ images, setImages ] = useState<string[]>([]);
 
   const [ previews, setPreviews ] = useState<Preview[]>([]);
 
   useEffect(() => {
     console.log('load data', data);
+    if (data.pictures) {
+      setImages(data.pictures);
+    }
     // filter previews here (check there are not in data when included)
   }, [data]);
 
@@ -59,8 +60,6 @@ export const ImageFieldSet = ({ data, onSave, propertyId }: Props) => {
     }
   };
 
-  const saveUrl = () => {};
-  const saveFile = () => {};
   const deletePreview = (id: string) => {
     return () => setPreviews(previews.filter(p => p.id !== id));
   };
@@ -80,8 +79,8 @@ export const ImageFieldSet = ({ data, onSave, propertyId }: Props) => {
           { images.map((img, i) => (<GalleryImage url={img} key={i.toString()} index={i} />))}
           { previews.map((preview) => {
             return preview.url ?
-              <UrlPreview url={preview.url} key={preview.id} onSave={saveUrl} onDelete={deletePreview(preview.id)} /> :
-              <FilePreview file={preview.file} key={preview.id} onSave={saveFile} onDelete={deletePreview(preview.id)} />
+              <UrlPreview url={preview.url} key={preview.id} onSave={onSaveUrl} onDelete={deletePreview(preview.id)} /> :
+              <FilePreview file={preview.file} key={preview.id} onSave={onSaveFile} onDelete={deletePreview(preview.id)} />
           })}
           <div className="image-uploader">
             <div className="input-selector">
@@ -102,7 +101,7 @@ export const ImageFieldSet = ({ data, onSave, propertyId }: Props) => {
 
 type FilePreviewProps = {
   file: File | undefined;
-  onSave: () => void;
+  onSave: (f: File) => void;
   onDelete: () => void;
 }
 
@@ -153,7 +152,12 @@ const FilePreview = ({ file, onSave, onDelete }: FilePreviewProps) => {
       
     };
     previewFile(upload);
-  }, [upload, setPreview])
+  }, [upload, setPreview]);
+
+  const saveFile = () => {
+    if (upload !== undefined)
+      onSave(upload)
+  };
 
   console.log(file)
 
@@ -164,7 +168,7 @@ const FilePreview = ({ file, onSave, onDelete }: FilePreviewProps) => {
       { ready && <div className="gallery-image" style={preview}></div>}
       <div className="gallery-preview-overlay">
         { ready ? <>
-          <div className="preview-save" onClick={onSave}>
+          <div className="preview-save" onClick={saveFile}>
             <MdCloudUpload />
           </div>
           <div className="preview-delete" onClick={onDelete}>
@@ -180,7 +184,7 @@ const FilePreview = ({ file, onSave, onDelete }: FilePreviewProps) => {
 
 type UrlPreviewProps = {
   url: string;
-  onSave: () => void;
+  onSave: (url: String) => void;
   onDelete: () => void;
 };
 
@@ -200,7 +204,7 @@ const UrlPreview = ({ url, onSave, onDelete }: UrlPreviewProps) => {
     <div className="image-holder">
       <div className="gallery-image" style={divStyle}></div>
       <div className="gallery-preview-overlay">
-        <div className="preview-save" onClick={onSave}>
+        <div className="preview-save" onClick={() => onSave(url)}>
           <MdCloudUpload />
         </div>
         <div className="preview-delete" onClick={onDelete}>

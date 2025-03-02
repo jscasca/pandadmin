@@ -93,9 +93,51 @@ export const PropertyEditor = ({listingId}: Props) => {
 
   const saveFeatures = async (updates: any) => {
     console.log('Saving updates: ', updates);
+    // set loading...
     const updated = await authAxios.put(`/inventory/properties/${listingId}`, updates);
-    console.log(updated);
-    setListing(updated.data);
+    // remove loading...
+    console.log(updated.data);
+    setListing(updated.data.data);
+  };
+
+  const uploadImage = async (f: File) => {
+    console.log('uploading image: ', f);
+    const updates = { image: f };
+    const opts = { headers: { 'Content-Type': 'multipart/form-data'}};
+    const updated = await authAxios.post(`inventory/properties/${listingId}/images`, updates, opts);
+    console.log('uploaded image: ', updated);
+    // set listing?
+  };
+
+  const saveUpdates = async (updates: any) => {
+    // set loading ....
+    const updated = await authAxios.put(`/inventory/properties/${listingId}`, updates);
+    // remove loading...
+    console.log(updated.data);
+    setListing(updated.data.data);
+  }
+
+  const addImageUrl = async (url: String) => {
+    console.log('adding image: ', url);
+    const updates = {
+      add: {
+        pictures: url
+      }
+    }
+    saveUpdates(updates);
+  };
+
+  const updateImages = async (images: String[]) => {
+    console.log('saving image order: ', images);
+    // set listing after
+    const updates = {
+      update: {
+        pictures: images
+      }
+    };
+    const updated = await authAxios.put(`/inventory/properties/${listingId}`, updates);
+    console.log(updated.data);
+    setListing(updated.data.data);
   };
 
   return (<>
@@ -128,7 +170,14 @@ export const PropertyEditor = ({listingId}: Props) => {
             <FeatureFieldSet onSave={saveFeatures} data={listing} />
           </div>
           <div className={activeTab === 'images' ? 'active' : ''}>
-            { listingId && (<ImageFieldSet propertyId={listingId} onSave={() => {}} data={{}} />)}
+            { listingId && (
+              <ImageFieldSet
+                propertyId={listingId}
+                onSaveFile={uploadImage}
+                onSaveUrl={addImageUrl}
+                onSaveOrder={updateImages}
+                data={listing} />
+            )}
           </div>
           <div className={activeTab === 'development' ? 'active' : ''}>
             <h2>Amenities</h2>
