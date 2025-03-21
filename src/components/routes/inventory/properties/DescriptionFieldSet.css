@@ -1,0 +1,46 @@
+
+.description-form {
+  width: 100%;
+  padding: 20px;
+}
+
+.description-editor {
+  border: 2px dashed #f77416;
+}
+
+.form-controls {
+	padding: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.form-controls button {
+	border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+	font-weight: 700;
+  background-color: #03a8f4;
+  min-width: 128px;
+	cursor: pointer;
+}
+
+.form-controls button:hover {
+	background-color: #03a8f4bb;
+}
+
+.form-controls button.main {
+	background-color: #f77416;
+}
+
+.form-controls button.main:hover {
+	background-color: #f77416bb;
+}
+
+.form-controls button.main:disabled,
+.form-controls button.main[disabled] {
+	background-color: #03a8f45e;
+}

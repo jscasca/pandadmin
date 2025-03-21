@@ -1,0 +1,69 @@
+.bubble-menu {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: .7rem;
+  display: flex;
+  gap: .25rem;
+  padding: .2rem;
+}
+
+.bubble-menu button {
+  background-color: unset;
+  border: none;
+  padding: 10px;
+  margin: none;
+  border-radius: 5px;
+  color: #f77416;
+  font-weight: 500;
+  font-size: .875rem;
+  line-height: 1.15;
+}
+
+.bubble-menu button.is-active {
+  background-color: #f7741699;
+  color: #fff;
+}
+
+.control-group {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem;
+  padding: 10px;
+}
+
+.button-group button {
+  background-color: #f77416;
+  border: none;
+  padding: 10px;
+  margin: none;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 500;
+  font-size: .875rem;
+  line-height: 1.15;
+}
+
+.button-group button:hover {
+  background-color: #f77416bb;
+}
+
+.button-group button.is-active {
+  background-color: #f7741666;
+}
+
+.tiptap {
+  border-top: none;
+	height: 200px;
+	overflow-y: auto;
+}
+
+.tiptap:focus-visible,
+.tiptap:focus {
+  outline: none;
+}

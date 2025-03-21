@@ -18,7 +18,10 @@ export const Developments = () => {
   return (
     <>
       <div id="sidebar">
-        <h1>Developmentsssssss</h1>
+        <h1>Desarrollos</h1>
+      </div>
+      <div className="">
+        <a href="/inventory/developments/new">Agregar Desarrollo</a>
       </div>
       <div>
         <SortableTable

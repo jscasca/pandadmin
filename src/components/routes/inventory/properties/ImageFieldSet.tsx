@@ -36,7 +36,7 @@ export const ImageFieldSet = ({ data, onSaveOrder, onSaveFile, onSaveUrl, proper
   const [ previews, setPreviews ] = useState<Preview[]>([]);
 
   useEffect(() => {
-    console.log('load data', data);
+    if (!data) return;
     if (data.pictures) {
       setImages(data.pictures);
     }

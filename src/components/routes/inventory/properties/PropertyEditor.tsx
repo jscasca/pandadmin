@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import './PropertyEditor.css';
 import { FeatureFieldSet } from "./FeatureFieldset";
 import { ImageFieldSet } from "./ImageFieldSet";
+import { DescriptionFieldSet } from "./DescriptionFieldSet";
+import { DevelopmentFieldSet } from "./DevelopmentFieldSet";
 
 type Props = {
   listingId: string|undefined;
@@ -89,7 +91,7 @@ export const PropertyEditor = ({listingId}: Props) => {
 
   const coverStyle = {
     backgroundImage: `url(${listing?.coverimage ? listing.coverimage : '/no_image.jpg'})`
-  }
+  };
 
   const saveFeatures = async (updates: any) => {
     console.log('Saving updates: ', updates);
@@ -161,9 +163,9 @@ export const PropertyEditor = ({listingId}: Props) => {
         <div className="tab-header">
           <div className={activeTab === 'features' ? 'active' : ''} onClick={() => changeTab('features')}>Caracteristicas</div>
           <div className={activeTab === 'images' ? 'active' : ''} onClick={() => changeTab('images')}>Imagenes</div>
-          <div className={activeTab === 'development' ? 'active' : ''} onClick={() => changeTab('development')}>Desarrollo</div>
-          <div className={activeTab === 'tab4' ? 'active' : ''} onClick={() => changeTab('tab4')}>Tab 4</div>
-          <div className={activeTab === 'tab5' ? 'active' : ''} onClick={() => changeTab('tab5')}>Tab 5</div>
+          <div className={activeTab === 'description' ? 'active' : ''} onClick={() => changeTab('description')}>Descripcion</div>
+          <div className={activeTab === 'development' ? 'active' : ''} onClick={() => changeTab('development')}>Ubicacion/Desarrollo</div>
+          {/* <div className={activeTab === 'tab5' ? 'active' : ''} onClick={() => changeTab('tab5')}>Tab 5</div> */}
         </div>
         <div className="tab-container">
           <div className={activeTab === 'features' ? 'active' : ''}>
@@ -179,8 +181,11 @@ export const PropertyEditor = ({listingId}: Props) => {
                 data={listing} />
             )}
           </div>
+          <div className={activeTab === 'description' ? 'active' : ''}>
+            <DescriptionFieldSet onSave={saveFeatures} data={listing} />
+          </div>
           <div className={activeTab === 'development' ? 'active' : ''}>
-            <h2>Amenities</h2>
+            <DevelopmentFieldSet />
           </div>
         </div>
       </div>

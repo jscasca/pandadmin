@@ -84,6 +84,32 @@ export const FeatureFieldSet = ({ data, onSave }: Props) => {
   return (<>
     <div className="form-edit">
       <h2>Caracteristicas</h2>
+      <div className="form-row price-row">
+        <div className="row-field">
+          <label htmlFor="sale_price">Precio venta</label>
+          <input id="sale_price" />
+        </div>
+        <div className="row-field">
+          <label htmlFor="sale_availability">Disponible</label>
+          <label className="switch">
+            <input id="sale_availability" type="checkbox" />
+            <span className="slider round"></span>
+          </label>
+        </div>
+      </div>
+      <div className="form-row main-feature-row">
+        <div className="row-field">
+          <label htmlFor="rent_price">Precio renta</label>
+          <input id="rent_price" />
+        </div>
+        <div className="row-field">
+          <label htmlFor="rent_availability">Disponible</label>
+          <label className="switch">
+            <input id="rent_availability" type="checkbox" />
+            <span className="slider round"></span>
+          </label>
+        </div>
+      </div>
       <div className="form-row main-feature-row">
         <div className="form-field">
           <label htmlFor="rooms">Cuartos</label>

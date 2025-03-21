@@ -1,0 +1,63 @@
+
+.newdev-container {
+  width: 620px;
+  margin: auto;
+}
+
+.newdev-container h2 {
+  padding-left: 20px;
+  color: #a0a0a0;
+}
+
+.newdev-container input.empty {
+  border-bottom: 2px solid #dd0000;
+}
+
+.newdev-container input:disabled,
+.newdev-container input[disabled] {
+  border-bottom: 2px solid #8a8a8a;
+  background-color:#cdcfd1bb;
+}
+
+.newdev-container input {
+  border: 0;
+  outline: 0;
+  border-bottom: 2px solid #03a8f45e;
+  font-size: 1.4rem;
+  color: #5e6775;
+  margin: 0 4px;
+  width: 94%;
+}
+
+.newdev-container input::placeholder {
+  color: #ccc;
+}
+
+.newdev-form-row {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.newdev-form-row .field {
+  display: flex;
+  flex-direction: column;
+  margin: 0 6px;
+  flex-grow: 1;
+}
+
+.newdev-form-row .short {
+  width: 100px;
+}
+
+.newdev-form-row .medium {
+  flex-grow: 1;
+}
+
+.newdev-form-row .long {
+  flex-grow: 2;
+}
+
+.newdev-container .form-controls img {
+  width: 15px;
+  height: 15px;
+}

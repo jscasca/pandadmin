@@ -21,6 +21,7 @@ import { Developments } from "./routes/inventory/developments/DevelopmentHome";
 // Properties
 import { Properties } from "./routes/inventory/properties/PropertyHome";
 import { Property } from "./routes/inventory/properties/Property";
+import { NewDevelopment } from "./routes/inventory/developments/NewDevelopment";
 
 const productLoader = async ({ params }: {params: any}) => {
   // do something with params eg product/productId would be params.productId
@@ -60,6 +61,7 @@ export const AppRouter = () => {
           path: 'developments',
           children: [
             { index: true, element: <Developments /> },
+            { path: 'new', element: <NewDevelopment /> },
             { path: ':id', element: <Development /> }
           ]
         },
