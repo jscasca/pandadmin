@@ -10,11 +10,13 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@tiptap/extension-heading": "^2.11.5",
+    "@tiptap/extension-link": "^2.11.5",
     "@tiptap/extension-list-keymap": "^2.11.5",
+    "@tiptap/extension-placeholder": "^2.11.5",
     "@tiptap/extension-underline": "^2.11.5",
     "@tiptap/pm": "^2.11.5",
-    "@tiptap/react": "^2.11.5",
-    "@tiptap/starter-kit": "^2.11.5",
+    "@tiptap/react": "^2.26.1",
+    "@tiptap/starter-kit": "^2.26.1",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@vis.gl/react-google-maps": "^1.2.0",
@@ -22,6 +24,7 @@
     "axios-auth-refresh": "^3.3.6",
     "draft-js": "^0.11.7",
     "react": "^18.3.1",
+    "react-beautiful-dnd": "^13.1.1",
     "react-datepicker": "^7.4.0",
     "react-dom": "^18.3.1",
     "react-dropzone": "^14.3.5",
@@ -32,7 +35,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3003 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

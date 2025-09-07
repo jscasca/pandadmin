@@ -1,3 +1,21 @@
+:root {
+  --color-primary: #9333ea;
+  --color-primary-hover: #7e22ce;
+  --color-primary-active: #6b21a8;
+  --color-secondary: #f97316;
+  --color-secondary-hover: #ea580c;
+  --color-secondary-active: #ea580c;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --color-border: #d1d5db;
+  --error-border: #EF4444;
+  --error-background: #fee2e2;
+  --error-text: #B91C1C;
+  --radius: 0.5rem;
+  --spacing: 1rem;
+  --borders: #e5e7eb;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +23,314 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #fafafa;
+  color: var(--text-secondary);
+}
+
+input.error {
+  background-color: var(--error-background);
+  border-color: var(--error-border) !important;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center; /* center horizontally */
+  padding: 2rem; /* breathing room */
+}
+
+.form-container .centered-form {
+  width: 100%;
+  max-width: 600px; /* keeps form readable */
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.appform .row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.row-spaced {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+.row span {
+  margin-top: 1rem;
+  padding-top: 0.6rem 1.25rem;
+  font-size: 18px;
+}
+
+.row .field {
+  flex: 1 1; /* grow, shrink, but minimum 250px */
+  min-width: 0; /* fallback safeguard */
+}
+
+.row .field.grow2 {
+  flex: 2 1 250px; /* same rule, but 2x growth */
+  min-width: 0; /* fallback safeguard */
+}
+
+.wizard-progress {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  align-items: center;
+  margin: 2rem auto;
+  max-width: 600px;
+  position: relative;
+}
+
+/* Progress bar container */
+.progress-bar {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: #e5e7eb; /* gray-200 */
+  z-index: 0;
+  transform: translateY(-50%);
+  border-radius: 2px;
+}
+
+/* Actual progress line */
+.progress {
+  height: 100%;
+  background: var(--color-primary);
+  transition: width 0.4s ease;
+  border-radius: 2px;
+}
+
+.steps {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1; /* pills above progress line */
+  gap: 0.75rem;
+}
+
+.step {
+  flex: 1;
+  text-align: center;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: var(--color-primary);
+}
+
+.step.pending {
+  background: #e5e7eb;
+  color: #6b7280;
+}
+
+.step.active {
+  filter: brightness(1.3);
+  color: white;
+}
+
+.step.done {
+  color: white;
+}
+
+.step:hover {
+  filter: brightness(1.3);
+  transform: translateY(-1px);
+}
+
+/******** Forms and Fields **********/
+.icon-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.icon-field svg {
+  width: 1rem;
+  height: 1rem;
+  color: #9333ea; /* purple accent */
+}
+
+.icon-field label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #374151; /* gray-700 */
+}
+
+.icon-field input {
+  width: 100%;
+  text-align: center;
+  padding: 0.4rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+}
+
+.field input,
+.field select {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background: #fff;
+
+  box-sizing: border-box;
+}
+
+.icon-field input:focus,
+.field input:focus,
+.field select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.2);
+}
+
+/* Buttons */
+button {
+  margin-top: 1rem;
+  background: var(--color-primary);
+  color: white;
+  font-weight: 600;
+  padding: 0.6rem 1.25rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+button.radio-btn:not(.active) {
+  filter: brightness(0.6);
+}
+button.radio-btn.active {
+  filter: brightness(1.2);
+}
+
+button.btn-primary {
+  background: var(--color-secondary);
+}
+button.btn-primary:hover {
+  background: var(--color-secondary-hover);
+}
+button.btn-primary:active {
+  background: var(--color-secondary-active);
+}
+
+button:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+button:active {
+  background: var(--color-primary-active);
+  transform: translateY(0);
+}
+
+.btn:disabled,
+.btn.disabled {
+  background: #e5e7eb; /* gray-200 */
+  color: #9ca3af;      /* gray-400 */
+  cursor: not-allowed;
+  opacity: 0.7;
+  transform: none;
+}
+
+/* debug helpers (remove later) */
+/* .form-container .centered-form { outline: 1px dashed #c084fc; }
+.row { outline: 1px dashed #60a5fa; }
+.field { outline: 1px dashed #f97316; } */
+
+/****** NAVBAR *******/
+.navbar {
+  background-color: var(--color-primary);
+  overflow: hidden;
+  display: flex;
+  padding: 0px 16px;
+}
+.navbar-center {
+  flex-grow: 1;
+}
+.navbar-logo img {
+  width: 140px;
+}
+
+.navbar-dropmenu {
+  position: absolute;
+  background-color: var(--color-primary);
+  min-width: 160px;
+  right: 0;
+  z-index: 1;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+button.navbar-dropdown {
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  margin-top: 0;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  transition: background 0.2s ease;
+}
+.navbar-dropdown:hover,
+.navbar-dropdown:focus {
+  background-color: rgba(255,255,255,0.15);
+}
+
+.navbar-drop-item {
+  color: white;
+  font-size: 18px;
+}
+
+.navbar-drop-item:hover,
+.navbar-drop-item:focus {
+  background-color: rgba(255,255,255,0.15);
+}
+
+.navbar-drop-item button {
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  margin-top: 0;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  transition: background 0.2s ease;
+}
+
+
+
+
+/******* GENERAL *******/
+.hidden {
+  display: none;
 }

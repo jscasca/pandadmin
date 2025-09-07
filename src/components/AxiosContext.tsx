@@ -2,13 +2,14 @@ import React, {createContext, useContext} from 'react';
 import axios from 'axios';
 import {AuthContext} from './AuthContext';
 import createAuthRefreshInterceptor, { AxiosAuthRefreshRequestConfig } from 'axios-auth-refresh';
+import { BASE_URL } from '../Constants';
 
 interface IAxiosContext {
   authAxios: any;
   publicAxios: any;
 }
 
-const baseUrl = 'http://localhost:8008';
+const baseUrl = BASE_URL;
 
 const AxiosContext = createContext<IAxiosContext>({authAxios: null, publicAxios: null});
 const { Provider } = AxiosContext;

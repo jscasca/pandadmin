@@ -3,6 +3,7 @@ import React, { createContext, useState, useEffect } from "react";
 export interface IUser {
   id: string;
   name: string;
+  icon: string;
   token: string;
   refresh: string;
 }

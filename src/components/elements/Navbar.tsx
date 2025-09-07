@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import './Navbar.css';
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthContext";
 
@@ -40,7 +39,9 @@ export const Navbar = () => {
           <div className="navbar-drop-item">
             <button onClick={userLogout} >Log out</button>
           </div>
-          <div className="navbar-drop-item">Other item</div>
+          <div className="navbar-drop-item">
+            <button>Other btn</button>
+          </div>
         </div>
       </div>
     </nav>

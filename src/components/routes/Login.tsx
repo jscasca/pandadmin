@@ -5,7 +5,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import './Login.css';
 
 export const Login = () => {
-  const [username, setUsername] = useState("");
+
+  const [ view, setView ] = useState('login');
+  const [displayname, setDisplayname] = useState("");
+  const [username, setUsername] = useState(""); // user's email
   const [password, setPassword] = useState("");
   const [active, setActive] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string|null>(null); // New state for handling error messages
@@ -23,12 +26,28 @@ export const Login = () => {
     }
   });
 
+  const handleRegister = async (e: any) => {
+    e.preventDefault();
+    setActive(false);
+    try {
+      const response = await publicAxios.post('auth/user/register', {
+        name: displayname,
+        email: username,
+        password
+      });
+      login(response.data);
+      navigate('/'); // navigate to welcome since you are new
+    } catch(error: any) {
+      console.error('Failed: ', error)
+    }
+  };
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     // Lock form
     setActive(false);
     try {
-      const response = await publicAxios.post('/auth/clerk/login', {
+      const response = await publicAxios.post('/auth/user/login', {
         name: username,
         password
       });
@@ -49,12 +68,12 @@ export const Login = () => {
 
   return (
     <div className="login-page">
-      <div className="login-div">
+      { view === 'login' && (<div className="login-div">
         <form className="login-form" onSubmit={handleSubmit}>
           <input
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="Username"
+            placeholder="Email"
           />
           <input
             type="password"
@@ -63,9 +82,36 @@ export const Login = () => {
             placeholder="Password"
           />
           <button disabled={!active} type="submit">Login</button>
+          <div className="link-toggle">
+            <p onClick={() => setView('register')}>Register</p>
+          </div>
         </form>
         {errorMessage && <div className="login-error" style={{ color: "red" }}>{errorMessage}</div>}{" "}
-      </div>
+      </div>)}
+      { view === 'register' && (<div className="login-div">
+        <form className="login-form" onSubmit={handleRegister}>
+          <input
+            value={displayname}
+            onChange={(e) => setDisplayname(e.target.value)}
+            placeholder="Display name"
+          />
+          <input
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Email"
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+          />
+          <button disabled={!active} type="submit">Register</button>
+          <div className="link-toggle">
+            <p onClick={() => setView('login')}>Log in</p>
+          </div>
+        </form>
+      </div>)}
       
     </div>
   );

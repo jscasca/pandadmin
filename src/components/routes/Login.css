@@ -26,6 +26,12 @@
   font-size: 14px;
 }
 
+.login-div .link-toggle {
+  margin-top: 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
 .login-div button {
   text-transform: uppercase;
   outline: 0;
