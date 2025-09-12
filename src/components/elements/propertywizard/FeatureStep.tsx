@@ -7,7 +7,7 @@ import {
   MdOutlineLayers,
   MdOutlineClose,
 } from "react-icons/md";
-import { Tiptap } from "./editor/Tiptap";
+import { Tiptap } from "../editor/Tiptap";
 
 type Props = {
   initialData: any;
@@ -53,7 +53,15 @@ export const FeatureStep = ({ initialData, onComplete }: Props) => {
 
   const handleNext = () => {
     if (validate()) {
-      onComplete({});
+      const featureData = {
+        rooms,
+        bathrooms,
+        sqft,
+        parking,
+        amenities,
+        description
+      }
+      onComplete(featureData);
     }
   }
   return (<>
@@ -172,7 +180,7 @@ const Amenities = ({ datalist, amenities, onChange }: AmenitiesProps) => {
   return (<>
   <fieldset className="fs-amenities">
     <legend>Amenidades</legend>
-    <div className="amenities">
+    <div className="amenities field">
       <div className="tag-space">
         { amenities.map((tag) => (<button onClick={() => removeTag(tag)} className="amenity-tag" title="" key={tag} ><span>{tag}</span><MdOutlineClose /></button>)) }
       </div>

@@ -1,22 +1,37 @@
 import React from "react";
+import { MdAdd, MdHomeWork, MdHouse } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+
+const DEVELOPMENTS = '/inventory/developments';
+const NEW_DEV = '/inventory/developments/new';
+
+const PROPERTIES = '/inventory/properties';
+const NEW_PROP = '/inventory/properties/new';
 
 export const InventoryIndex = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const { user } = useContext(AuthContext);
+  const toPage = (to: string) => () => navigate(to);
 
   return (
     <>
-      <div id="sidebar">
-        <h1>Index</h1>
+    <div className="inventory">
+      <h1>Inventario</h1>
+      <div className="section">
+        <h3>Desarrollos</h3>
+        <div className="buttons">
+          <button onClick={toPage(DEVELOPMENTS)}>Desarrollos <MdHomeWork /></button>
+          <button onClick={toPage(NEW_DEV)}>Nuevo Desarrollo <MdAdd /></button>
+        </div>
       </div>
-      <div id="detail">
-        <a className="home-link" href="/inventory/location">
-          <div className="linked-div">
-            Ubicaciones
-          </div>
-        </a>
+      <div className="section">
+        <h3>Propiedades</h3>
+        <div className="buttons">
+          <button onClick={toPage(PROPERTIES)}>Propiedades <MdHouse /></button>
+          <button onClick={toPage(NEW_PROP)}>Nueva Propiedad <MdAdd /></button>
+        </div>
       </div>
+    </div>
     </>
   );
 }

@@ -81,9 +81,9 @@ export const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
-          <button disabled={!active} type="submit">Login</button>
+          <button disabled={!active} type="submit">Iniciar Sesion</button>
           <div className="link-toggle">
-            <p onClick={() => setView('register')}>Register</p>
+            <p onClick={() => setView('register')}>Registrarse</p>
           </div>
         </form>
         {errorMessage && <div className="login-error" style={{ color: "red" }}>{errorMessage}</div>}{" "}
@@ -106,9 +106,9 @@ export const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
-          <button disabled={!active} type="submit">Register</button>
+          <button disabled={!active} type="submit">Registrarse</button>
           <div className="link-toggle">
-            <p onClick={() => setView('login')}>Log in</p>
+            <p onClick={() => setView('login')}>Iniciar Sesion</p>
           </div>
         </form>
       </div>)}

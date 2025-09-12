@@ -1,5 +1,6 @@
 import React from "react";
-import { NewAptForm } from "../../elements/NewAptForm";
+// import { NewAptForm } from "../../elements/NewAptForm";
+import { PropertyWizard } from "../../elements/propertywizard/PropertyWizard";
 
 export const NewLocation = () => {
   // const navigate = useNavigate();
@@ -8,7 +9,8 @@ export const NewLocation = () => {
 
   return (
     <>
-      <NewAptForm />
+      {/* <NewAptForm /> */}
+      <PropertyWizard />
     </>
   );
 }

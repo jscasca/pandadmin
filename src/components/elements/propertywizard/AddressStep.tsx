@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import * as CONST from '../../Constants';
+import * as CONST from '../../../Constants';
 
 import {
   APIProvider,
@@ -18,9 +18,9 @@ type Props = {
 const mapCenter = { lat: 19.43145883973556, lng: -99.13194980120416 };
 
 const buildingTypes = [
-  { label: 'House', value: 'HOUSE' },
-  { label: 'Apartment', value: 'APT' },
-  { label: 'Unit', value: 'UNIT' }
+  { label: 'Casa', value: 'HOUSE' },
+  { label: 'Departamento', value: 'APT' },
+  { label: 'Unidad', value: 'UNIT' }
 ];
 
 const provinces = [
@@ -61,6 +61,8 @@ const provinces = [
 export const AddressStep = ({ initialData, onComplete }: Props) => {
   // Type of building: buildingTypes
   const [ building, setBuilding ] = useState(initialData.building || 'APT');
+
+  const [ development, setDevelopment ] = useState(initialData.development || '');
 
   //
   const [ street, setStreet ] = useState(initialData.street || '');
@@ -127,6 +129,8 @@ export const AddressStep = ({ initialData, onComplete }: Props) => {
         municipality,
         city,
         province,
+        zip,
+        development,
         location: {
           type: 'Point',
           coordinates: [lng, lat]
@@ -142,20 +146,30 @@ export const AddressStep = ({ initialData, onComplete }: Props) => {
     <div className="appform">
       <div className="row">
         <div className="notifications">{}</div>
-        <button style={{marginLeft: 'auto', marginRight: '2.5rem'}} className="btn-primary" type='button' onClick={handleNext}>Next</button>
+        <button style={{marginLeft: 'auto', marginRight: '2.5rem'}} className="btn-primary" type='button' onClick={handleNext}>Siguiente</button>
       </div>
       <div className="row">
-        <span>My listing is:</span>
+        <span>Quiero publicar:</span>
         {buildingTypes.map(build => (<button
         key={build.value}
         type="button"
-        onClick={() => setBuilding(build.value)}
+        onClick={() => {setBuilding(build.value);}}
         className={`radio-btn ${building === build.value ? "active":""}`}>{build.label}</button>))}
       </div>
+      {/* TODO: Copnnect autocomplete */}
+      { building === 'APT' && <div className="row">
+        <div className="field">
+        <input
+        value={development}
+        onChange={(e) => setDevelopment(e.target.value)}
+        placeholder="Nombre del Desarrollo"
+        type="text"/>
+        </div>
+      </div>}
       <div className="row">
         <div className="field grow2">
           <APIProvider apiKey={CONST.MAP_API}>
-            <PlaceAutocomplete onPlaceSelect={getPlace} />
+            <PlaceAutocomplete onPlaceSelect={getPlace} placeholder="Direccion" />
           </APIProvider>
         </div>
         <div className="field">
@@ -186,7 +200,7 @@ export const AddressStep = ({ initialData, onComplete }: Props) => {
         <div className="field">
           <input
             type="text"
-            placeholder="Street"
+            placeholder="Calle"
             value={street}
             onChange={(e)=>setStreet(e.target.value)}
           />
@@ -204,7 +218,7 @@ export const AddressStep = ({ initialData, onComplete }: Props) => {
         <div className="field">
           <input
             type="text"
-            placeholder="Suburb"
+            placeholder="Colonia"
             value={suburb}
             onChange={(e)=>setSuburb(e.target.value)}
           />
@@ -212,7 +226,7 @@ export const AddressStep = ({ initialData, onComplete }: Props) => {
         <div className="field">
           <input
             type="text"
-            placeholder="Municipality"
+            placeholder="Delegacion"
             value={municipality}
             onChange={(e)=>setMunicipality(e.target.value)}
           />
@@ -223,7 +237,7 @@ export const AddressStep = ({ initialData, onComplete }: Props) => {
         <div className="field">
           <input
             type="text"
-            placeholder="City"
+            placeholder="Ciudad"
             value={city}
             onChange={(e)=>setCity(e.target.value)}
           />
@@ -234,14 +248,14 @@ export const AddressStep = ({ initialData, onComplete }: Props) => {
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setProvince((e.target as HTMLSelectElement).value)}
             className=""
           >
-            <option value=''>State</option>
+            <option value=''>Estado</option>
             {provinces.map(p => (<option key={p.code} value={p.code}>{p.name}</option>))}
           </select>
         </div>
         <div className="field">
           <input
             type="text"
-            placeholder="Zip"
+            placeholder="C.P."
             value={zip}
             onChange={(e) => setZip(e.target.value)}
           />
@@ -252,7 +266,7 @@ export const AddressStep = ({ initialData, onComplete }: Props) => {
           <input
             disabled={true}
             type="text"
-            placeholder="latitude"
+            placeholder="latitud"
             value={lat}
             onChange={(e) => setLat(e.target.value)}
           />
@@ -261,7 +275,7 @@ export const AddressStep = ({ initialData, onComplete }: Props) => {
           <input
             disabled={true}
             type="text"
-            placeholder="longitude"
+            placeholder="longitud"
             value={lng}
             onChange={(e) => setLng(e.target.value)}
           />
@@ -270,7 +284,7 @@ export const AddressStep = ({ initialData, onComplete }: Props) => {
           <input
             readOnly={true}
             type="text"
-            placeholder="Maps link"
+            placeholder="Enlace Google Maps"
             value={link}
             onChange={(e) => setLink(e.target.value)}
           />

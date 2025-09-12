@@ -37,10 +37,10 @@ export const Navbar = () => {
         <button onClick={toggleMenu} className="navbar-dropdown">{user?.name}</button>
         <div className={show ? "navbar-dropmenu" : "hidden"}>
           <div className="navbar-drop-item">
-            <button onClick={userLogout} >Log out</button>
+            <button onClick={userLogout} >Cerrar Sesion</button>
           </div>
           <div className="navbar-drop-item">
-            <button>Other btn</button>
+            <button>Extras</button>
           </div>
         </div>
       </div>
