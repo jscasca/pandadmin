@@ -6,6 +6,7 @@
     "@draft-js-plugins/buttons": "^4.3.3",
     "@draft-js-plugins/editor": "^4.1.4",
     "@draft-js-plugins/static-toolbar": "^4.1.4",
+    "@radix-ui/react-accordion": "^1.2.12",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

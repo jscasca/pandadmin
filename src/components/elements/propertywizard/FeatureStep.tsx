@@ -130,13 +130,13 @@ export const FeatureStep = ({ initialData, onComplete }: Props) => {
   </>);
 };
 
-type AmenitiesProps = {
+export type AmenitiesProps = {
   datalist?: string[];
   amenities: string[];
   onChange: (amenities: string[]) => void;
 }
 
-const Amenities = ({ datalist, amenities, onChange }: AmenitiesProps) => {
+export const Amenities = ({ datalist, amenities, onChange }: AmenitiesProps) => {
   // const [ amenities, setAmenities ] = useState();
 
   const [ input, setInput ] = useState('');

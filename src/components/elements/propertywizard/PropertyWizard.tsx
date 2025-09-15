@@ -31,11 +31,11 @@ export const PropertyWizard = () => {
     try {
       const response = await authAxios.post('/properties', propertyData);
       console.log('returned...', response);
-      if (response.data.error) {
+      if (response.error) {
         //
-        console.error(response.data.error);
+        console.error(response.error);
       } else {
-        navigate(`/inventory/properties/${response.data.data._id}`);
+        navigate(`/inventory/properties/${response._id}`);
       }
     } catch (e) {
       console.error('Failed auth call: ', e);

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { MdCloudUpload, MdKeyboardArrowDown, MdKeyboardArrowUp, MdOutlineClose, MdOutlineSearch } from "react-icons/md";
-import { DropZone } from "../DropZone";
+import React, { useState } from "react";
+import { MdCloudUpload, MdKeyboardArrowDown, MdKeyboardArrowUp, MdOutlineClose } from "react-icons/md";
 import { ImageManager } from "../ImageManager";
 
 type Props = {
@@ -17,8 +16,6 @@ export const ImageStep = ({ initialData, onComplete }: Props) => {
   const [ caption, setCaption ] = useState('');
 
   const [ preview, setPreview ] = useState(false);
-
-  const [ manager ] = useState(false);
 
   const [ widget, setWidget ] = useState(false);
 
@@ -138,8 +135,6 @@ export const ImageStep = ({ initialData, onComplete }: Props) => {
       <GalleryImage url={url} caption={caption} remove={() => {setPreview(false); setCaption(''); setUrl('');}} onSave={addPicture} />
     </div>}
 
-    { manager && <ImageManager2 /> }
-
     { !widget && <div className="row centered">
       <button onClick={() => setWidget(true)}><MdCloudUpload /></button>
     </div>}
@@ -159,7 +154,7 @@ type GalleryProps = {
   onSave?: () => void;
 }
 
-const GalleryImage = ({ url, caption, bumpUp, remove, bumpDown, onSave }: GalleryProps) => {
+export const GalleryImage = ({ url, caption, bumpUp, remove, bumpDown, onSave }: GalleryProps) => {
 
   const imgStyle = {
     backgroundSize: 'contain',
@@ -187,136 +182,6 @@ const GalleryImage = ({ url, caption, bumpUp, remove, bumpDown, onSave }: Galler
       </div>
       <div className="image" style={imgStyle}></div>
       <div className="caption">{caption}</div>
-    </div>
-  </div>
-  </>);
-};
-
-const ImageManager2 = () => {
-
-  const [ filter, setFilter ] = useState('');
-
-  // fetch first
-  const [ images, setImages ] = useState(['https://iili.io/Kxs6B2V.jpg','https://iili.io/2NUqSoX.jpg', 'https://iili.io/2GtvoPe.png']);
-
-  const [ preview, setPreview ] = useState<any>(null);
-
-  const search = () => {
-    setImages([]);
-  }
-
-  const onDrop = (file: File[]) => {
-    console.log(file);
-    console.log(file[0]);
-    setPreview(file[0]);
-    // setPreview(file[0]);
-  }
-
-  const uploadFile = () => {
-    console.log('uploading file: ', preview);
-  };
-
-  return (<>
-  <div className="image-drive">
-    <div className="controls">
-      <div className="icon-field">
-        <input
-          type="text"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        />
-        <button onClick={search}><MdOutlineSearch /><MdCloudUpload /></button>
-      </div>
-      <div className=""><DropZone onDrop={onDrop} /></div>
-    </div>
-    <div className="preview">
-    { preview && <PreviewImage file={preview} onSave={uploadFile} onRemove={() => setPreview(null)} />}
-    </div>
-    <div className="gallery">
-    {images.map((img: any) => (
-      <div className="gallery-img"><img src={img} alt={'some'} /></div>
-    )) }
-    </div>
-
-  </div>
-  </>);
-};
-
-type PreviewProps = {
-  file: File | undefined;
-  onSave: (f: File) => void;
-  onRemove: () => void;
-};
-
-const PreviewImage = ({ file, onSave, onRemove }: PreviewProps) => {
-
-  console.log('preview: ' , file)
-  const [ upload ] = useState(file);
-  const [ preview, setPreview ] = useState({});
-  const [ ready, setReady ] = useState(false);
-
-  useEffect(() => {
-    if (!upload) return;
-    const previewFile = (f: File) => {
-      console.log('about to read: ', f);
-      const reader = new FileReader();
-      let error;
-      if (!window.FileReader) {
-        error = 'No file reader';
-      }
-      if (!['image/jpeg', 'image/png'].includes(f.type)) {
-        error = 'No accepted type'
-      }
-      const maxSize = 5 * 1024 * 1024; // 5MB
-      if (f.size > maxSize) {
-        error = 'File too large'
-      }
-      if (!(f instanceof Blob)) {
-        error = 'Cant read file'
-      }
-      if (f instanceof Blob) {
-        console.log('is a file blob');
-      }
-      if (!error) {
-        reader.readAsDataURL(f);
-        reader.onload = () => {
-          const prevStyle = {
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center center',
-            backgroundColor: 'black',
-            backgroundImage: 'url(' + reader.result + ')'
-          }
-          setPreview(prevStyle);
-          setReady(true);
-        };
-      } else {
-        console.log('display error: ', error);
-      }
-      
-    };
-    previewFile(upload);
-  }, [upload, setPreview]);
-
-  const saveFile = () => {
-    if (upload !== undefined) {
-      onSave(upload);
-    }
-  };
-
-  return (<>
-  <div className="gallery-card">
-    <div className="image-holder">
-      { ready ? <div className="preview-actions">
-        <div className="bumpup">
-          <button onClick={saveFile}><MdKeyboardArrowUp /></button>
-        </div>
-        <div className="delete">
-          <button onClick={onRemove}><MdOutlineClose /></button>
-        </div>
-      </div> : <img src="/loading-gif.gif" alt="loading..." />}
-      { ready && <div className="gallery-image" style={preview}></div>}
-      {/* <div className="image" style={imgStyle}></div> */}
     </div>
   </div>
   </>);

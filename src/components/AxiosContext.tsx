@@ -56,7 +56,7 @@ const AxiosProvider: React.FC<any> = ({children}) => {
   );
 
   authAxios.interceptors.response.use(
-    response => response,
+    response => response.data,
     async (err) => {
       const original = err.config;
       if (original && (original as AxiosAuthRefreshRequestConfig).skipAuthRefresh) {
