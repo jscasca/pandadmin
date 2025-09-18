@@ -122,6 +122,7 @@ export const AddressStep = ({ initialData, onComplete }: Props) => {
   const handleNext = () => {
     if (validate()) {
       const addressData = {
+        building,
         street,
         exterior,
         interior,
@@ -130,6 +131,7 @@ export const AddressStep = ({ initialData, onComplete }: Props) => {
         city,
         province,
         zip,
+        glink: link,
         development,
         location: {
           type: 'Point',

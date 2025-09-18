@@ -3,10 +3,11 @@ import React, { useEffect, useState } from "react";
 type CurrencyInputProps = {
   value: string | number;
   onChange: (val: string) => void;
+  onBlur?: (val: string) => void;
   id?: string;
 };
 
-export const CurrencyInput = ({ value, onChange, id }: CurrencyInputProps) => {
+export const CurrencyInput = ({ value, onChange, onBlur, id }: CurrencyInputProps) => {
 
   const formatNumber = (n: string|number) => {
     let number = typeof n === 'number' ? n.toString() : n;
@@ -27,6 +28,14 @@ export const CurrencyInput = ({ value, onChange, id }: CurrencyInputProps) => {
     onChange(clean);
   };
 
+  const handleBlur = (e: any) => {
+    if (onBlur) {
+      const raw = e.target.value;
+      const clean = cleanNumber(raw);
+      onBlur(clean);
+    }
+  }
+
   useEffect(() => {
     setSaved(formatNumber(value));
   }, [value]);
@@ -35,6 +44,7 @@ export const CurrencyInput = ({ value, onChange, id }: CurrencyInputProps) => {
     <input
       id={id}
       value={saved}
+      onBlur={handleBlur}
       onChange={handleChange}
       inputMode="numeric"
       pattern="[0-9]*"

@@ -81,6 +81,14 @@ h3 a:hover {
   margin-bottom: 1rem;
 }
 
+.row.row-fix {
+  width: 80%;
+}
+
+.row.row-fix .field input {
+  font-size: 0.8rem;
+}
+
 .row-spaced {
   display: flex;
   justify-content: space-around;
@@ -91,6 +99,10 @@ h3 a:hover {
   margin-top: 1rem;
   padding-top: 0.6rem 1.25rem;
   font-size: 18px;
+}
+
+.row .label {
+  margin-top: 0.5rem;
 }
 
 .row .field label {
@@ -306,14 +318,24 @@ button.radio-btn.active {
 button.btn-primary {
   background: var(--color-secondary);
 }
-button.btn-primary:hover {
+button.btn-primary:hover:not(:disabled) {
   background: var(--color-secondary-hover);
 }
 button.btn-primary:active {
   background: var(--color-secondary-active);
 }
 
-button:hover {
+button.btn-primary:disabled {
+  background: color-mix(in srgb, var(--color-secondary) 25%, white);
+  cursor: not-allowed;
+}
+
+button:disabled {
+  background: color-mix(in srgb, var(--color-primary) 25%, white);
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
   background: var(--color-primary-hover);
   transform: translateY(-1px);
 }
@@ -431,8 +453,9 @@ button:active {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-width: 900px;
-  margin: auto;
+  width: 100%;
+  /* max-width: 900px; */
+  /* margin: auto; */
   padding: 1rem;
 }
 
