@@ -19,7 +19,7 @@ export const PlaceAutocomplete = ({ onPlaceSelect, placeholder, initialValue }: 
     console.log(places);
     if (!places || !inputRef.current) return;
     const options = {
-      fields: [ 'geoemtry', 'name', 'formatted_address', 'address_components'],
+      fields: [ 'geometry', 'name', 'formatted_address', 'address_components'],
       componentRestrictions: { country: 'mx'}
     };
     setPlacecomplete(new places.Autocomplete(inputRef.current, options));

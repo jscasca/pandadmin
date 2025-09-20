@@ -7,7 +7,7 @@ export const Navbar = () => {
 
   const navigate = useNavigate();
 
-  const { user, logout } = useContext(AuthContext);
+  const { user, loading, logout } = useContext(AuthContext);
   const [ show, setShow ] = useState(false);
 
   const userLogout = () => {
@@ -21,11 +21,13 @@ export const Navbar = () => {
 
   useEffect(() => {
     console.log('checking for user...', user);
-    if (!user) {
+    if (!loading && !user) {
       navigate('/login');
       // console.log('no user');
     }
   }, [user, navigate]);
+
+  if(loading) return null;
 
   return (
     <nav className="navbar">

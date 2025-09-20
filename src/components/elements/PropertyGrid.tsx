@@ -148,7 +148,7 @@ export const PropertyGrid = () => {
         {properties.map((p) => (
           <div key={p._id} className="card">
             <div className="image" style={{'cursor': 'pointer'}} onClick={() => {navigate(`/inventory/properties/${p._id}`)}}>
-              <img src={p.pictures.length > 0 ? '' : '/no_image.jpg'} alt={`${p.street} ${p.exterior} ${p.interior}`} />
+              <img src={p.pictures.length > 0 ? p.pictures[0].url : '/no_image.jpg'} alt={`${p.street} ${p.exterior} ${p.interior}`} />
             </div>
             <div className="content">
               <h3><a href={`/inventory/properties/${p._id}`}>{p.development} {p.interior}</a></h3>

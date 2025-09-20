@@ -14,12 +14,7 @@ export const Property = () => {
 
   return (
     <>
-      <div id="sidebar">
-        <h1>Property</h1>
-      </div>
-      <div className="container">
-        <PropertyEditor listingId={id} />
-      </div>
+      <PropertyEditor listingId={id} />
     </>
   );
 }

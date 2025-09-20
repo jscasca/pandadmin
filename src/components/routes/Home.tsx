@@ -28,6 +28,11 @@ export default function Root() {
             Inventario
           </div>
         </a>
+        <a className="home-link" href="/encasa">
+          <div className="linked-div">
+            EnCasa
+          </div>
+        </a>
       </div>
     </>
   );
