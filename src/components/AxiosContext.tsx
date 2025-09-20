@@ -44,7 +44,6 @@ const AxiosProvider: React.FC<any> = ({children}) => {
       // console.log('sending request: ', config.url, (config as any).skipAuthRefresh);
       const token = authContext?.user?.token;
       // console.log('interceptor token: ', token?.substring(0) + '...');
-      console.log()
       if(token) {
         (config.headers as any)['x-access-token'] = token;
       }
@@ -81,7 +80,7 @@ const AxiosProvider: React.FC<any> = ({children}) => {
     const options = {
       method: 'POST',
       data,
-      url: baseUrl + '/auth/clerk/refresh',
+      url: baseUrl + '/auth/user/refresh',
     };
 
     return publicAxios(options)

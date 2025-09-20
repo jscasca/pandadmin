@@ -10,6 +10,7 @@ export interface IUser {
 
 export interface IAuthContext {
   user: IUser | null;
+  loading: boolean;
   // setUser: React.Dispatch<SetStateAction<any>>;
   logout: () => void;
   login: (user: IUser) => void;
@@ -22,18 +23,21 @@ export const IsAuthenticated = (): boolean => {
 
 export const AuthContext = createContext<IAuthContext>({
   user: null,
+  loading: true,
   login: (_) => {console.log('ctx login');},
   logout: () => {console.log('ctx logout');}
 });
 
 export const AuthProvider: React.FC<any> = ({ children }) => {
   const [ user, setUser ] = useState<IUser|null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const store = localStorage.getItem('user');
     if (store) {
       setUser(JSON.parse(store));
     }
+    setLoading(false);
   }, []);
 
   const login = (u: IUser) => {
@@ -47,7 +51,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

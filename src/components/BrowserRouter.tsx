@@ -8,6 +8,9 @@ import { Login } from "./routes/Login";
 import { Product } from "./routes/Product";
 import { ProductHome } from "./routes/ProductHome";
 
+import { EncasaHome } from "./routes/encasa/Home";
+import { EncasaIndex } from "./routes/encasa/Index";
+
 import { IsAuthenticated } from "./AuthContext";
 import { AddressRoute } from "./routes/Addresses";
 import { InventoryHome } from "./routes/inventory/Base";
@@ -22,6 +25,9 @@ import { Developments } from "./routes/inventory/developments/DevelopmentHome";
 import { Properties } from "./routes/inventory/properties/PropertyHome";
 import { Property } from "./routes/inventory/properties/Property";
 import { NewDevelopment } from "./routes/inventory/developments/NewDevelopment";
+import { EncasaSearch } from "./routes/encasa/EncasaSearch";
+import { EncasaMap } from "./routes/encasa/EncasaMap";
+import { EncasaProperty } from "./routes/encasa/EncasaProperty";
 
 const productLoader = async ({ params }: {params: any}) => {
   // do something with params eg product/productId would be params.productId
@@ -47,6 +53,27 @@ export const AppRouter = () => {
     {
       path: 'login',
       element: <Login />
+    },
+    {
+      path: 'encasa',
+      element: <EncasaHome />,
+      children: [
+        {
+          index: true,
+          element: <EncasaIndex />
+        },
+        {
+          path: 'search',
+          element: <EncasaSearch />
+        },
+        {
+          path: 'map',
+          element: <EncasaMap />
+        },{
+          path: ':id',
+          element: <EncasaProperty />
+        }
+      ]
     },
     {
       path: 'inventory',
