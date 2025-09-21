@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 
 import { AxiosContext } from "../AxiosContext";
 import { useNavigate } from "react-router-dom";
+// import { Toggle } from "./Toggle";
+import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from "react-icons/md";
 
 // Mock data (replace with API later)
 const mockProperties = Array.from({ length: 42 }).map((_, i) => ({
@@ -37,6 +39,9 @@ export const PropertyGrid = () => {
   const [filtered, setFiltered] = useState(mockProperties);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+
+  const [ sale, setSale ] = useState('sale');
+  const [ order, setOrder ] = useState('_id,up');
 
   // Pagination state
   const [page, setPage] = useState(1);
@@ -125,12 +130,37 @@ export const PropertyGrid = () => {
     <div className="property-grid">
       {/* Filters */}
       <div className="filters">
+        {/* <div className="filter">
+          <Toggle label="En Venta" checked={false} onChange={() => {}}/>
+        </div>
+        <div className="filter">
+          <Toggle label="En Renta" checked={false} onChange={() => {}}/>
+        </div> */}
+        <div className="filter">
+          <select value={sale} onChange={(e) => {setSale(e.target.value)}}>
+            <option value="sale">Venta</option>
+            <option value="rent">Renta</option>
+          </select>
+        </div>
+        <div className="filter">
+          <select value={order} onChange={(e) => {setOrder(e.target.value)}} >
+            <option value="price,down">Price <MdOutlineArrowDropDown /></option>
+            <option value="price,up">Price <MdOutlineArrowDropUp /></option>
+            <option value="_id,down">Created <MdOutlineArrowDropDown /></option>
+            <option value="_id,up">Created <MdOutlineArrowDropUp /></option>
+          </select>
+        </div>
+        {/* suburb */}
         <input
           type="text"
           placeholder="Search properties..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+
+        {/* sorting: price/created/updated */}
+
+        {/* filtering: sale/rent/share */}
 
         <select
           value={statusFilter}

@@ -81,14 +81,9 @@ export const ImageStep = ({ initialData, onComplete }: Props) => {
     }
   }
 
-  const filterSearch = async (filter: string) => {
-    console.log(filter)
-    return [];
-  };
-
-  const uploadFile = async (file: File): Promise<string> => {
-    console.log(file)
-    return ''
+  const onSelect = async (url: string) => {
+    console.log(url)
+    // return [];
   };
 
   return (<>
@@ -139,7 +134,9 @@ export const ImageStep = ({ initialData, onComplete }: Props) => {
       <button onClick={() => setWidget(true)}><MdCloudUpload /></button>
     </div>}
 
-    { widget && <ImageManager fetchImages={filterSearch} uploadImage={uploadFile}/>}
+    { widget && <ImageManager onSelect={onSelect} />}
+
+    {/* { widget && <ImageManager fetchImages={filterSearch} uploadImage={uploadFile}/>} */}
 
   </div>
   </>);
