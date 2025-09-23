@@ -1087,6 +1087,35 @@ button.navbar-dropdown {
   font-weight: bold;
   color: var(--color-secondary);
 }
+.custom-cluster-icon {
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border: 2px solid white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.cluster-marker.small {
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
+}
+
+.cluster-marker.medium {
+  width: 40px;
+  height: 40px;
+  font-size: 14px;
+}
+
+.cluster-marker.large {
+  width: 50px;
+  height: 50px;
+  font-size: 16px;
+}
 
 
 /******* GENERAL *******/

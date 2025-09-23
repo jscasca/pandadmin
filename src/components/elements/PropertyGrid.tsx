@@ -3,16 +3,16 @@ import React, { useState, useEffect, useContext } from "react";
 import { AxiosContext } from "../AxiosContext";
 import { useNavigate } from "react-router-dom";
 // import { Toggle } from "./Toggle";
-import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from "react-icons/md";
+// import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from "react-icons/md";
 
 // Mock data (replace with API later)
-const mockProperties = Array.from({ length: 42 }).map((_, i) => ({
-  id: i,
-  title: `Property ${i + 1}`,
-  price: Math.floor(Math.random() * 1000000),
-  status: ["For Sale", "For Rent", "For Share"][i % 3],
-  image: "https://iili.io/Kxs6B2V.jpg",
-}));
+// const mockProperties = Array.from({ length: 42 }).map((_, i) => ({
+//   id: i,
+//   title: `Property ${i + 1}`,
+//   price: Math.floor(Math.random() * 1000000),
+//   status: ["For Sale", "For Rent", "For Share"][i % 3],
+//   image: "https://iili.io/Kxs6B2V.jpg",
+// }));
 
 type PaginatedResponse<T> = {
   data: T[];
@@ -36,21 +36,25 @@ export const PropertyGrid = () => {
   const { authAxios } = useContext(AxiosContext);
   // const [properties, setProperties] = useState(mockProperties);
   const [ properties, setProperties ] = useState<Property[]>([]);
-  const [filtered, setFiltered] = useState(mockProperties);
-  const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState("all");
+  // const [filtered, setFiltered] = useState(mockProperties);
+  // const [search, setSearch] = useState("");
+  // const [statusFilter, setStatusFilter] = useState("all");
 
-  const [ sale, setSale ] = useState('sale');
-  const [ order, setOrder ] = useState('_id,up');
+  // const [ sale, setSale ] = useState('sale');
+  // const [ order, setOrder ] = useState('_id,up');
 
   // Pagination state
-  const [page, setPage] = useState(1);
-  const pageSize = 9;
-  const totalPages = Math.ceil(filtered.length / pageSize);
+  // const [page, setPage] = useState(1);
+  // const pageSize = 9;
+  // const totalPages = Math.ceil(filtered.length / pageSize);
 
   const [nextCursor, setNextCursor] = useState<string | null>(null);
 
-  console.log(properties, setFiltered, nextCursor);
+  console.log(properties, nextCursor);
+
+  const showMore = () => {
+    console.log('show more');
+  };
 
   const fetchProperties = async(params: Record<string, any> = {}): Promise<PaginatedResponse<any>> => {
     const queryString = new URLSearchParams(params as any).toString();
@@ -86,14 +90,18 @@ export const PropertyGrid = () => {
       const params = {
         limit: 20,
         order: 'desc',
-        field: '_id'
+        field: '_id',
+        next_cursor: nextCursor ? nextCursor : undefined
       };
       const queryString = new URLSearchParams(params as any).toString();
       try {
         console.log('pre-r', queryString);
         const response = await a.get(`/properties?${queryString}`);
+        if (response.next_cursor) {
+          setNextCursor(response.next_cursor);
+        }
         console.log('r', response);
-        setProperties(response.data);
+        setProperties(prev => [...prev, ...response.data]);
       } catch (err) {
         console.log('e:', err);
       }
@@ -123,8 +131,8 @@ export const PropertyGrid = () => {
   //   setPage(1); // reset to first page on filter change
   // }, [search, statusFilter, properties]);
 
-  const paginated = filtered.slice((page - 1) * pageSize, page * pageSize);
-  console.log(paginated);
+  // const paginated = filtered.slice((page - 1) * pageSize, page * pageSize);
+  // console.log(paginated);
 
   return (
     <div className="property-grid">
@@ -136,33 +144,33 @@ export const PropertyGrid = () => {
         <div className="filter">
           <Toggle label="En Renta" checked={false} onChange={() => {}}/>
         </div> */}
-        <div className="filter">
+        {/* First filtering */}
+        {/* <div className="filter">
           <select value={sale} onChange={(e) => {setSale(e.target.value)}}>
             <option value="sale">Venta</option>
             <option value="rent">Renta</option>
           </select>
-        </div>
-        <div className="filter">
+        </div> */}
+        {/* Sorting */}
+        {/* <div className="filter">
           <select value={order} onChange={(e) => {setOrder(e.target.value)}} >
             <option value="price,down">Price <MdOutlineArrowDropDown /></option>
             <option value="price,up">Price <MdOutlineArrowDropUp /></option>
             <option value="_id,down">Created <MdOutlineArrowDropDown /></option>
             <option value="_id,up">Created <MdOutlineArrowDropUp /></option>
           </select>
-        </div>
-        {/* suburb */}
-        <input
+        </div> */}
+        {/* suburb filtering */}
+        {/* <input
           type="text"
           placeholder="Search properties..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-        />
-
-        {/* sorting: price/created/updated */}
+        /> */}
 
         {/* filtering: sale/rent/share */}
 
-        <select
+        {/* <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
         >
@@ -170,7 +178,7 @@ export const PropertyGrid = () => {
           <option value="For Sale">For Sale</option>
           <option value="For Rent">For Rent</option>
           <option value="For Share">For Share</option>
-        </select>
+        </select> */}
       </div>
 
       {/* Grid */}
@@ -194,7 +202,10 @@ export const PropertyGrid = () => {
 
       {/* Pagination */}
       <div className="pagination">
-        <button disabled={page === 1} onClick={() => setPage(page - 1)}>
+        { nextCursor && <div className="">
+          <button onClick={() => showMore()} >Mostrar mas</button>
+        </div>}
+        {/* <button disabled={page === 1} onClick={() => setPage(page - 1)}>
           Prev
         </button>
         <span>
@@ -205,7 +216,7 @@ export const PropertyGrid = () => {
           onClick={() => setPage(page + 1)}
         >
           Next
-        </button>
+        </button> */}
       </div>
     </div>
   );
