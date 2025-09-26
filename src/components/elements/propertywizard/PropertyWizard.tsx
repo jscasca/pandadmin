@@ -17,6 +17,8 @@ export const PropertyWizard = () => {
   const [ activeStep, setActiveStep ] = useState(0);
   const [ formData, setFormData ] = useState({});
 
+  // const [ developmentData, setDevelopmentData ] = useState();
+
   const [ loading, setLoading ] = useState(false);
 
   const handleNextStep = (stepData: any) => {
@@ -46,6 +48,11 @@ export const PropertyWizard = () => {
     // navigate to property listing
   };
 
+  const setBase = (property: any) => {
+    // double check contents?
+    setFormData(property);
+  };
+
   return (<>
   <div className="form-container">
     <div className="centered-form">
@@ -71,6 +78,7 @@ export const PropertyWizard = () => {
         <AddressStep
           initialData={formData}
           onComplete={handleNextStep}
+          onSelect={setBase}
         />
       )}
 

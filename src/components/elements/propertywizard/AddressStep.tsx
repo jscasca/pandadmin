@@ -9,10 +9,12 @@ import {
   useMapsLibrary,
   useAdvancedMarkerRef,
 } from '@vis.gl/react-google-maps';
+import { Autocomplete } from "../Autocomplete";
 
 type Props = {
   initialData: any;
   onComplete: (data: any) => void;
+  onSelect?: (data: any) => void;
 };
 
 const mapCenter = { lat: 19.43145883973556, lng: -99.13194980120416 };
@@ -58,7 +60,7 @@ const provinces = [
   { code: "ZAC", name: "Zacatecas" }
 ];
 
-export const AddressStep = ({ initialData, onComplete }: Props) => {
+export const AddressStep = ({ initialData, onComplete, onSelect }: Props) => {
   // Type of building: buildingTypes
   const [ building, setBuilding ] = useState(initialData.building || 'APT');
 
@@ -77,6 +79,8 @@ export const AddressStep = ({ initialData, onComplete }: Props) => {
   const [ lat, setLat ] = useState(initialData.lat || '');
   const [ lng, setLng ] = useState(initialData.lng || '');
   const [ link, setLink ] = useState(initialData.link || '');
+
+  const [ autoAddress, setAutoAddress ] = useState<string|undefined>();
 
   const [ selectedPlace, setSelectedPlace ] = useState<any>(null);
   const [ markerRef, marker ] = useAdvancedMarkerRef();
@@ -144,6 +148,30 @@ export const AddressStep = ({ initialData, onComplete }: Props) => {
     }
   };
 
+  const onAutocomplete = (s: any) => {
+    console.log(s);
+    // take the data form the autocomplete, fill data and send base
+    if (onSelect) onSelect(s);
+    // fill local fields
+    setBuilding(s.building);
+    setStreet(s.street);
+    setExterior(s.exterior);
+    setSuburb(s.suburb);
+    setMunicipality(s.municipality);
+    setCity(s.city);
+    setProvince(s.province);
+    setZip(s.zip);
+    setLink(s.glink);
+    setDevelopment(s.development);
+
+    if (s.location) {
+      setLat(s.location.coordinates[1]);
+      setLng(s.location.coordinates[0]);
+      setSelectedPlace({lat: s.location.coordinates[1], lng: s.location.coordinates[0]});
+    }
+    setAutoAddress(`${s.street} ${s.exterior}`);
+  };
+
   return (<>
     <div className="appform">
       <div className="row">
@@ -161,17 +189,24 @@ export const AddressStep = ({ initialData, onComplete }: Props) => {
       {/* TODO: Copnnect autocomplete */}
       { building === 'APT' && <div className="row">
         <div className="field">
-        <input
+          <Autocomplete
+            value={development}
+            onChange={(e) => setDevelopment(e.target.value)}
+            onSelect={onAutocomplete}
+            fetchUrl="/properties/suggestions"
+            suggestionFn={(o) => `${o.development}`}
+          />
+        {/* <input
         value={development}
         onChange={(e) => setDevelopment(e.target.value)}
         placeholder="Nombre del Desarrollo"
-        type="text"/>
+        type="text"/> */}
         </div>
       </div>}
       <div className="row">
         <div className="field grow2">
           <APIProvider apiKey={CONST.MAP_API}>
-            <PlaceAutocomplete onPlaceSelect={getPlace} placeholder="Direccion" />
+            <PlaceAutocomplete initialValue={autoAddress} onPlaceSelect={getPlace} placeholder="Direccion" />
           </APIProvider>
         </div>
         <div className="field">
@@ -331,9 +366,10 @@ interface PlaceAutocompleteProps {
   // onPlaceSelect: (place: google.maps.places.PlaceResult | null) => void;
   onPlaceSelect: (place: any) => void;
   placeholder?: string;
+  initialValue?: string;
 }
 
-const PlaceAutocomplete = ({ onPlaceSelect, placeholder }: PlaceAutocompleteProps) => {
+const PlaceAutocomplete = ({ onPlaceSelect, placeholder, initialValue }: PlaceAutocompleteProps) => {
   const [placeAutocomplete, setPlaceAutocomplete] =
     useState<google.maps.places.Autocomplete | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -364,7 +400,7 @@ const PlaceAutocomplete = ({ onPlaceSelect, placeholder }: PlaceAutocompleteProp
 
   return (
     <div className="autocomplete-container">
-      <input ref={inputRef} placeholder={placeholder} />
+      <input defaultValue={initialValue} ref={inputRef} placeholder={placeholder} />
     </div>
   );
 };

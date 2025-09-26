@@ -14,7 +14,7 @@ type Props = {
   value: string;
   onChange: (evt: any ) => void;
   onSelect: (s: any) => void;
-  suggestionFn?: (o: any) => string;
+  suggestionFn: (o: any) => string;
   fetchUrl: string;
   delay?: number;
 };
@@ -25,7 +25,7 @@ export const Autocomplete = ({
   value,
   onChange,
   onSelect,
-  suggestionFn = (o: any) => o.name,
+  suggestionFn,
   fetchUrl,
   delay = 2000 }: Props) => {
 
@@ -53,9 +53,14 @@ export const Autocomplete = ({
 
   const fetchSuggestions = useCallback((url: string, filter: any) => {
     console.log('fetching axios', filter);
-    authAxios.get(url, {params: filter}).then((r: any) => {
-      console.log('fetched sug:', r.data.data);
-      setAllSuggestions(r.data.data);
+    const params = {
+      search: filter
+    }
+    const queryString = new URLSearchParams(params as any).toString();
+    authAxios.get(`${url}?${queryString}`).then((r: any) => {
+      console.log('fetched: ', r);
+      setAllSuggestions(r);
+      // setAllSuggestions(r.data.data);
     }).catch((e: any) => {
       console.error(e);
     });
@@ -63,7 +68,7 @@ export const Autocomplete = ({
 
   useEffect(() => {
     const empty = inputValue.length <= 0 || inputValue === lastSelected;
-    const getFilteringFn = (v: string) => (o: any) => o.name.toLowerCase().includes(v);
+    const getFilteringFn = (v: string) => (o: any) => o.development.toLowerCase().includes(v);
     // const filtered = inputValue.length > 0 ? allSuggestions.filter(getFilteringFn(inputValue.toLowerCase())) : [];
     const filtered = empty ? [] : allSuggestions.filter(getFilteringFn(inputValue.toLowerCase()));
     setSuggestions(filtered);
@@ -76,7 +81,7 @@ export const Autocomplete = ({
     const handler = setTimeout(() => {
       console.log('fetching after delay');
       // fetch all suggestions
-      fetchSuggestions(fetchUrl, {filters: { "name": {"$regex": inputValue, "$options": 'i'}}});
+      fetchSuggestions(fetchUrl, inputValue);
       lastFetch.current = Date.now();
     }, delay - (Date.now() - lastFetch.current));
     return () => { clearTimeout(handler)};
